@@ -9,7 +9,7 @@
 #define FCS16_INIT_VALUE 0xFFFF
 
 /** FCS value for valid frames. */
-#define FCS16_GOOD_VALUE 0xF0B8
+#define FCS16_GOOD_VALUE 0x0000
 
 #ifdef __cplusplus
 extern "C" {

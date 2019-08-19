@@ -240,14 +240,9 @@ int yahdlc_frame_data(yahdlc_control_t *control, const char *src,
     }
   }
 
-  // Invert the FCS value accordingly to the specification
-  fcs ^= 0xFFFF;
-
   // Run through the FCS bytes and escape the values
-  for (i = 0; i < sizeof(fcs); i++) {
-    value = ((fcs >> (8 * i)) & 0xFF);
-    yahdlc_escape_value(value, dest, &dest_index);
-  }
+  yahdlc_escape_value((fcs >> 8) & 0xff, dest, &dest_index);
+  yahdlc_escape_value((fcs >> 0) & 0xff, dest, &dest_index);
 
   // Add end flag sequence and update length of frame
   dest[dest_index++] = YAHDLC_FLAG_SEQUENCE;
